@@ -1,0 +1,24 @@
+<legend>Listado de Tareas</legend>
+<div class="row">
+    <% @todos.each_slice(4) do |row| %>
+      <% row.each do |todo| %>
+        <div class="col">
+          <div class="card">
+            <%= image_tag todo.photo, class:'card-img-top' %>
+            <div class="body">
+              <h5><%= todo.name %></h5>
+              <p><%= todo.description %></p>
+              <!--<%= link_to 'Show', todo %>
+              <%= link_to 'Edit', edit_todo_path(todo) %>
+              <%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %>-->
+              <%= link_to "Listo", "#", class: 'btn btn-success' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="w-100"></div>
+    <% end %>
+</div>
+<br>
+
+<%= link_to 'New Todo', new_todo_path %>
