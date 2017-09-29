@@ -6,12 +6,25 @@
           <div class="card">
             <%= image_tag todo.photo, class:'card-img-top' %>
             <div class="body">
-              <h5><%= todo.name %></h5>
+              <h5><%= link_to todo.name, todo  %></h5>
               <p><%= todo.description %></p>
               <!--<%= link_to 'Show', todo %>
               <%= link_to 'Edit', edit_todo_path(todo) %>
               <%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %>-->
-              <%= link_to "Listo", "#", class: 'btn btn-success' %>
+
+              <% if todo.list.last.nil? %>
+                <%= link_to "Listo", todo_lists_path(todo), class: 'btn btn-success', method: :post%>
+              <% elsif todo.list.last.completed %>
+                <% if todo.list.last.user == current_user %>
+                  <%= link_to "No Listo", list_path(todo.list.first.id), class: 'btn btn-danger', method: :put%>
+                <% else %>
+                    <%= link_to "Listo", todo_lists_path(todo), class: 'btn btn-success', method: :post%>
+                <% end %>
+
+              <% else %>
+                <%= link_to "Listo", todo_lists_path(todo), class: 'btn btn-success', method: :post%>
+              <% end %>
+
             </div>
           </div>
         </div>

@@ -1,19 +1,42 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <%= image_tag @todo.photo, class:'card-img-top' %>
+      <div class="body">
+        <h5><%= @todo.name  %></h5>
+        <p><%= @todo.description %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="row">
+      <% @users.each do |user| %>
+        <div class="col">
+          <div class="card">
+            <%= image_tag user.photo, class:'card-img-top' %>
+            <div class="body">
+              <h5><%= user.name  %></h5>
+              <p><%= user.email %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Photo:</strong>
-  <%= @todo.photo %>
-</p>
+<div class="row">
+  <legend> Ranking</legend>
+  <ul class="list-group">
+    <li class="list-group-item">Primeros 5 usuarios</li>
+    <% 5.times do |i| %>
+    <% unless @users[i].nil? %>
+      <li class="list-group-item "> <%= " #{ i + 1 } - #{@users[i].name}" %></li>
+    <% else %>
+      <li class="list-group-item "> <%= " #{ i + 1 } - ..." %></li>
+    <% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @todo.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @todo.description %>
-</p>
-
-<%= link_to 'Edit', edit_todo_path(@todo) %> |
-<%= link_to 'Back', todos_path %>
+    <% end %>
+  </ul>
+</div>
+<%= link_to 'Back', root_path %>
