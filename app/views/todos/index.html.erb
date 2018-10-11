@@ -15,12 +15,12 @@
               <% if todo.list.last.nil? %>
                 <%= link_to "Listo", todo_lists_path(todo), class: 'btn btn-success', method: :post%>
               <% elsif todo.list.last.completed %>
+                <%  %>
                 <% if todo.list.last.user == current_user %>
                   <%= link_to "No Listo", list_path(todo.list.first.id), class: 'btn btn-danger', method: :put%>
                 <% else %>
                     <%= link_to "Listo", todo_lists_path(todo), class: 'btn btn-success', method: :post%>
                 <% end %>
-
               <% else %>
                 <%= link_to "Listo", todo_lists_path(todo), class: 'btn btn-success', method: :post%>
               <% end %>
